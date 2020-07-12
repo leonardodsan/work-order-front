@@ -1,0 +1,97 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">{{pageTitle}}</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>
+    </div>
+
+    <div class="box-body" [formGroup]="formGroup">
+        <div class="row">
+            <div class="col-xs-12" *ngIf="!isEditing()">
+                <div class="form-group"
+                    [class.has-error]="formGroup.get('customer').hasError('required') && formGroup.get('customer').touched">
+                    <label>Cliente</label>
+                    <select class="form-control select2" style="width: 100%;" formControlName="customer">
+                        <option value="" selected="selected">Selecione o cliente</option>
+                        <option *ngFor="let customer of customers" [ngValue]="customer">{{customer.name}}</option>
+                    </select>
+                    <span *ngIf="formGroup.get('customer').hasError('required') && formGroup.get('customer').touched"
+                        class="help-block">Campo obrigatório</span>
+                </div>
+            </div>
+
+            <div class="col-xs-12" *ngIf="!isEditing()">
+                <div class="form-group"
+                    [class.has-error]="formGroup.get('device').hasError('required') && formGroup.get('device').touched">
+                    <label>Equipamento</label>
+                    <select class="form-control select2" style="width: 100%;" formControlName="device">
+                        <option value="" selected="selected">Selecione o equipamento</option>
+                        <option *ngFor="let device of devices" [ngValue]="device">{{device.alias}}</option>
+                    </select>
+                    <span *ngIf="formGroup.get('device').hasError('required') && formGroup.get('device').touched"
+                        class="help-block">Campo obrigatório</span>
+                </div>
+            </div>
+
+            <div class="col-xs-12" *ngIf="!isEditing()">
+                <div class="form-group"
+                    [class.has-error]="formGroup.get('accountable').hasError('required') && formGroup.get('accountable').touched">
+                    <label>Responsável</label>
+                    <select class="form-control select2" style="width: 100%;" formControlName="accountable">
+                        <option value="" selected="selected">Selecione o profissional responsável</option>
+                        <option *ngFor="let accountable of accountables" [ngValue]="accountable">{{accountable.name}}</option>
+                    </select>
+                    <span *ngIf="formGroup.get('accountable').hasError('required') && formGroup.get('accountable').touched"
+                        class="help-block">Campo obrigatório</span>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <label>Descrição</label>
+                <textarea type="text" formControlName="problem" rows="6" maxlength="1000"
+                  placeholder="Descreva os problemas com o equipamento" class="form-control"></textarea>
+                  <span *ngIf="formGroup.get('problem').hasError('required') && formGroup.get('problem').touched"
+                  class="help-block">Campo obrigatório</span>
+            </div>
+            <div class="col-xs-12">
+                <label>Situação</label>
+                <select class="form-control" formControlName="status">
+                  <option value="PENDING">Pendente</option>
+                  <option value="PROGRESS">Em andamento</option>
+                  <option value="FINISHED">Finalizada</option>
+                  <option value="STOPPED">Pausada</option>
+                </select>
+            </div>
+            
+            <div class="col-xs-12" *ngIf="isEditing()">
+                <div class="card-body">
+                    <label>Ocorrências</label>
+                    <div class="list-group" *ngIf="ocurrences.length > 0">
+                        <ng-container *ngFor="let ocurrence of ocurrences; let i = index">
+                            <span class="list-group-item list-group-item-action">
+                                {{ocurrence.createdAt | date: 'dd/MM/yyyy HH:mm'}} - {{ocurrence.description}}
+                            </span>
+                        </ng-container>
+                    </div>
+                    <div *ngIf="ocurrences.length == 0">
+                        <span>Nenhuma ocorrência cadastrada</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <button class="btn btn-primary" (click)="saveOrder()" [disabled]="formGroup.invalid">{{id != null ? 'Atualizar' : 'Salvar'}}</button>
+                </div>
+            </div>
+            <div class="col-xs-12" *ngIf="isEditing()">
+                <div class="form-group">
+                    <button class="btn btn-primary" [disabled]="formGroup.invalid" [routerLink]="['//orderOcurrence']" [queryParams]="{id: id}">Gerar ocorrência</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

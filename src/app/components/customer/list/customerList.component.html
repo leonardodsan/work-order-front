@@ -1,0 +1,25 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Clientes</h3>
+        <div class="box-tools pull-right">
+            <a routerLink="/customer"><button class="btn btn-primary" > Cadastrar </button></a>
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>
+    </div>
+
+    <div class="box-body">
+        
+            <div class="list-group" *ngIf="customers.length > 0">
+                <ng-container *ngFor="let customer of customers; let i = index">
+                    <button 
+                    [routerLink]="['//customer']" [queryParams]="{id: customer.id}"
+                    type="button" class="list-group-item list-group-item-action">Cliente: {{customer.name}} {{customer.phone}}</button>
+                </ng-container>
+            </div>
+            <div *ngIf="customers.length == 0">
+                <span>Nenhum cliente cadastrado</span>
+            </div>
+    </div>
+
+</div>

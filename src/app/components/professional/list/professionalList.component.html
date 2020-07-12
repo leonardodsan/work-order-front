@@ -1,0 +1,25 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Profissionais</h3>
+        <div class="box-tools pull-right">
+            <a routerLink="/professional"><button class="btn btn-primary" > Cadastrar </button></a>
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>
+    </div>
+
+    <div class="box-body">
+        
+            <div class="list-group" *ngIf="professionals.length > 0">
+                <ng-container *ngFor="let professional of professionals; let i = index">
+                    <button 
+                    [routerLink]="['//professional']" [queryParams]="{id: professional.id}"
+                    type="button" class="list-group-item list-group-item-action">Profissional: {{professional.name}} {{professional.profession}}</button>
+                </ng-container>
+            </div>
+            <div *ngIf="professionals.length == 0">
+                <span>Nenhum profissional cadastrado</span>
+            </div>
+    </div>
+
+</div>

@@ -1,0 +1,46 @@
+ 
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Ordens de serviço</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group" [formGroup]="formGroup">
+                <label>Responsável</label>
+                <select class="form-control select2" style="width: 100%;" formControlName="accountable">
+                    <option value="" selected="selected">Selecione o profissional responsável</option>
+                    <option *ngFor="let accountable of accountables" [ngValue]="accountable.id">{{accountable.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="form-group">
+                <button class="btn btn-primary" (click)="searchOrder()">Procurar</button>
+            </div>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="list-group" *ngIf="orders.length > 0">
+            <ng-container *ngFor="let order of orders; let i = index">
+                <button type="button"
+                [routerLink]="['//order']" [queryParams]="{id: order.id}"
+                    class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"> {{order.createdAt | date: 'dd/MM/yyyy HH:mm'}} - Cliente: {{order.customer.name}} - Equipamento: {{order.device.alias}} - Status: {{order.status}}</h5>
+                    </div>
+                    <div class="d-flex w-100 justify-content-between">
+                        <small class="mb-1">Em andamento: {{order.startMoment | date: 'dd/MM/yyyy HH:mm'}}</small>
+                    </div>
+                    <small class="mb-1">Finalizado: {{order.endMoment | date: 'dd/MM/yyyy HH:mm'}}</small>
+                </button>
+            </ng-container>
+        </div>
+        <div *ngIf="orders.length == 0">
+            <ng-container>
+                <span>Nenhuma ordem cadastrada</span>
+            </ng-container>
+        </div>
+    </div>
+</div>

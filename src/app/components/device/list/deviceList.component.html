@@ -1,0 +1,25 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Equipamentos</h3>
+
+        <div class="box-tools pull-right">
+            <a routerLink="/device"><button class="btn btn-primary" > Cadastrar </button></a>
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>
+    </div>
+
+    <div class="box-body">
+            <div class="list-group" *ngIf="devices.length > 0">
+                <ng-container *ngFor="let device of devices; let i = index">
+                    <button type="button"
+                    [routerLink]="['//device']" [queryParams]="{id: device.id}"
+                     class="list-group-item list-group-item-action">Equipamento: {{device.alias}}</button>
+                </ng-container>
+            </div>
+            <div *ngIf="devices.length == 0">
+                <span>Nenhum equipamento cadastrado</span>
+            </div>
+    </div>
+
+</div>

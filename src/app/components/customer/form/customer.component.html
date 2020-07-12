@@ -1,0 +1,58 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Cadastro de cliente</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>
+    </div>
+
+    <div class="box-body" [formGroup]="formGroup">
+        <div class="row">
+
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <div class="form-group"
+                        [class.has-error]="formGroup.get('name').hasError('required') && formGroup.get('name').touched">
+                        <label>Nome</label>
+                        <input type="text" formControlName="name" class="form-control" placeholder="João da Silva">
+                        <span *ngIf="formGroup.get('name').hasError('required') && formGroup.get('name').touched"
+                            class="help-block">Campo obrigatório</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" formControlName="email" class="form-control" placeholder="leonardo.dsan@gmail.com">
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>Endereço</label>
+                    <input type="text" formControlName="address" class="form-control" placeholder="R. São Miguel do Oeste, 836 - Ceará, Criciúma - SC, 88815-100">
+                </div>
+
+            </div>
+
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>Celular</label>
+                        <input formControlName="phone" type="text" class="form-control" placeholder="(48) 99999-9999"
+                            [textMask]="{mask: maskPhone, placeholderChar: '\u2000'}">
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <button class="btn btn-primary" (click)="saveCustomer()" [disabled]="formGroup.invalid" >{{id != null ? 'Atualizar' : 'Salvar'}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

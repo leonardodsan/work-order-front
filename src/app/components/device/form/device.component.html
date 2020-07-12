@@ -1,0 +1,50 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">Cadastro de equipamento</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+        </div>
+    </div>
+
+    <div class="box-body" [formGroup]="formGroup">
+        <div class="row">
+
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <div class="form-group"
+                        [class.has-error]="formGroup.get('alias').hasError('required') && formGroup.get('alias').touched">
+                        <label>Descrição</label>
+                        <input type="text" formControlName="alias" class="form-control" placeholder="Zenfone 5">
+                        <span *ngIf="formGroup.get('alias').hasError('required') && formGroup.get('alias').touched"
+                            class="help-block">Campo obrigatório</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <input type="text" formControlName="type" class="form-control" placeholder="Celular">
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label>Fabricante</label>
+                    <input type="text" formControlName="manufacturer" class="form-control" placeholder="Asus">
+                </div>
+
+            </div>
+
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <button class="btn btn-primary" (click)="saveDevice()" [disabled]="formGroup.invalid" >{{id != null ? 'Atualizar' : 'Salvar'}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
